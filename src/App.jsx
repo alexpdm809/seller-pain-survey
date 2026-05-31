@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { track } from '@vercel/analytics'
 import './App.css'
 
 const BENEFITS = [
@@ -318,6 +319,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const scrollToSurvey = () => {
+    track('Survey Started')
     surveyRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
@@ -436,6 +438,7 @@ function App() {
         body: JSON.stringify(payload),
       })
 
+      track('Survey Submitted')
       setSubmitted(true)
       surveyRef.current?.scrollIntoView({ behavior: 'smooth' })
     } catch (error) {
@@ -742,6 +745,7 @@ function App() {
       <footer className="footer">
         <div className="container">
           <p>Исследование болей продавцов маркетплейсов · 2026</p>
+          <p className="footer__version">Build Version: 1.0.1</p>
         </div>
       </footer>
     </div>
